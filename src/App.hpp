@@ -1,7 +1,7 @@
-#ifndef HELIOS_APP_H
-#define HELIOS_APP_H
+#ifndef HELIOS_APP_HPP
+#define HELIOS_APP_HPP
 
-#include <SDL3/SDL.h>
+#include <SDL2/SDL.h>
 
 class App {
 
@@ -20,4 +20,4 @@ public:
   void exit();
 };
 
-#endif // HELIOS_APP_H
+#endif // HELIOS_APP_HPP

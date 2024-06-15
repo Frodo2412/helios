@@ -1,23 +1,24 @@
 
-#include "App.h"
+#include "App.hpp"
 
-App::App() : isRunning_(true), window_(nullptr), renderer_(nullptr) {}
+App::App() : isRunning_(true), window_(NULL), renderer_(NULL) {}
 
 bool App::init() {
 
-  if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+  if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
     SDL_Log("SDL_Init failed: %s", SDL_GetError());
     return false;
   }
 
-  window_ = SDL_CreateWindow("Hello, SDL!", 800, 600, 0);
+  window_ = SDL_CreateWindow("Helios", SDL_WINDOWPOS_CENTERED,
+                             SDL_WINDOWPOS_CENTERED, 800, 600, 0);
 
   if (!window_) {
     SDL_Log("SDL_CreateWindow failed: %s", SDL_GetError());
     return false;
   }
 
-  renderer_ = SDL_CreateRenderer(window_, NULL);
+  renderer_ = SDL_CreateRenderer(window_, -1, 0);
 
   if (!renderer_) {
     SDL_Log("SDL_CreateRenderer failed: %s", SDL_GetError());
