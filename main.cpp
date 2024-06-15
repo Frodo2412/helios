@@ -1,4 +1,4 @@
-#include "src/App.h"
+#include "src/App.hpp"
 #include <SDL3/SDL_main.h>
 #include <iostream>
 
