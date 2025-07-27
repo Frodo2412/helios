@@ -24,7 +24,15 @@ object VectorSpec extends FunSuite:
     expect(result === Vector(-2, -4, -6))
 
   test("Should be able to get the opposite of a Vector"):
-    val vector = Vector(1, 2, 3)
-    expect(-vector === Vector(-1, -2, -3))
+    val vector = Vector(1, -2, 3)
+    expect(-vector === Vector(-1, 2, -3))
+
+  test("Should be able to multiply a Vector by a scalar"):
+    val vector = Vector(1, -2, 3)
+    expect(vector * 3.5 === Vector(3.5, -7.0, 10.5)) and expect(vector * 0.5 === Vector(0.5, -1.0, 1.5))
+
+  test("Should be able to divide a Vector by a scalar"):
+    val vector = Vector(1, -2, 3)
+    expect(vector / 2.0 === Vector(0.5, -1.0, 1.5))
 
 end VectorSpec

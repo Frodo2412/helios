@@ -11,4 +11,11 @@ case class Vector(x: Double, y: Double, z: Double):
   def unary_- : Vector =
     Vector(-x, -y, -z)
 
+  def *(scalar: Double): Vector =
+    Vector(x * scalar, y * scalar, z * scalar)
+
+  def /(scalar: Double): Vector =
+    if (scalar == 0) throw new ArithmeticException("Division by zero")
+    Vector(x / scalar, y / scalar, z / scalar)
+
 end Vector
