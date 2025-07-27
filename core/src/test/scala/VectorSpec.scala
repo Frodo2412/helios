@@ -18,9 +18,13 @@ object VectorSpec extends FunSuite:
     expect(result === Vector(1, 1, 6))
 
   test("Should be able to subtract two Vectors"):
-    val vector1 = Vector(3, -2, 5)
-    val vector2 = Vector(-2, 3, 1)
+    val vector1 = Vector(3, 2, 1)
+    val vector2 = Vector(5, 6, 7)
     val result = vector1 - vector2
-    expect(result === Vector(5, -5, 4))
+    expect(result === Vector(-2, -4, -6))
+
+  test("Should be able to get the opposite of a Vector"):
+    val vector = Vector(1, 2, 3)
+    expect(-vector === Vector(-1, -2, -3))
 
 end VectorSpec

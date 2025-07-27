@@ -24,4 +24,8 @@ object PointSpec extends FunSuite with Discipline:
     val result = point1 - point2
     expect(result === Vector(5, -5, 4))
 
+  test("Should be able to get the opposite of a point"):
+    val point = Point(1, 2, 3)
+    expect(-point === Point(-1, -2, -3))
+
 end PointSpec

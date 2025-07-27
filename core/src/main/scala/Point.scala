@@ -8,4 +8,6 @@ case class Point(x: Double, y: Double, z: Double):
   def -(other: Point): Vector =
     Vector(x - other.x, y - other.y, z - other.z)
 
+  def unary_- : Point = Point(-x, -y, -z)
+
 end Point
