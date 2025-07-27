@@ -2,7 +2,7 @@ package helios
 
 case class Point(x: Double, y: Double, z: Double):
 
-  def toTuple: (Double, Double, Double, Double) =
-    (x, y, z, 1.0)
+  def +(v: Vector): Point =
+    Point(x + v.x, y + v.y, z + v.z)
 
 end Point

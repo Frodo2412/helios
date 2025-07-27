@@ -1,10 +1,8 @@
 package helios
 
-import instances.given_Eq_Point
+import instances.given
 
-import cats.kernel.laws.discipline.EqTests
 import cats.syntax.all.*
-import org.scalacheck.Arbitrary
 import weaver.FunSuite
 import weaver.discipline.Discipline
 
@@ -15,5 +13,11 @@ object PointSpec extends FunSuite with Discipline:
     expect(point.x === 4.3)
     expect(point.y === -4.2)
     expect(point.z === 3.1)
+
+  test("Should be able to add a point to a vector"):
+    val point = Point(3, -2, 5)
+    val vector = Vector(-2, 3, 1)
+    val result = point + vector
+    expect(result === Point(1, 1, 6))
 
 end PointSpec

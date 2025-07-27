@@ -12,7 +12,7 @@ lazy val root = (project in file("."))
   .settings(
     name := "helios",
     idePackagePrefix := Some("helios")
-  )
+  ).aggregate(core, pictures)
 
 lazy val core = (project in file("core"))
   .settings(
