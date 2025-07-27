@@ -19,5 +19,11 @@ object PointSpec extends FunSuite with Discipline:
     val vector = Vector(-2, 3, 1)
     val result = point + vector
     expect(result === Point(1, 1, 6))
+    
+  test("Should be able to subtract two points"):
+    val point1 = Point(3, -2, 5)
+    val point2 = Point(-2, 3, 1)
+    val result = point1 - point2
+    expect(result === Vector(5, -5, 4))
 
 end PointSpec
