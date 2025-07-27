@@ -7,6 +7,8 @@ import weaver.FunSuite
 
 object VectorSpec extends FunSuite:
 
+  // TODO: Some of these tests can be turned into property-based tests because this is a pure mathematical structure.
+
   test("Should be able to construct a Vector"):
     val point = Vector(4.3, -4.2, 3.1)
     expect(point.x === 4.3) and expect(point.y === -4.2) and expect(point.z === 3.1)
@@ -34,5 +36,19 @@ object VectorSpec extends FunSuite:
   test("Should be able to divide a Vector by a scalar"):
     val vector = Vector(1, -2, 3)
     expect(vector / 2.0 === Vector(0.5, -1.0, 1.5))
+
+  test("Given a unitary vector, when #magnitude, it should return 1.0"):
+    val x = Vector(1, 0, 0)
+    val y = Vector(0, 1, 0)
+    val z = Vector(0, 0, 1)
+    expect(x.magnitude === 1.0) and expect(y.magnitude === 1.0) and expect(z.magnitude === 1.0)
+
+  test("Given a vector, when #magnitude, it should return the correct magnitude"):
+    val vector = Vector(1, 2, 3)
+    expect(vector.magnitude === Math.sqrt(14)) and expect(-vector.magnitude === Math.sqrt(14))
+
+  test("Given a zero vector, when #magnitude, it should return 0.0"):
+    val zeroVector = Vector(0, 0, 0)
+    expect(zeroVector.magnitude === 0.0)
 
 end VectorSpec

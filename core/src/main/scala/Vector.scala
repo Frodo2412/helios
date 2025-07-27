@@ -18,4 +18,7 @@ case class Vector(x: Double, y: Double, z: Double):
     if (scalar == 0) throw new ArithmeticException("Division by zero")
     Vector(x / scalar, y / scalar, z / scalar)
 
+  def magnitude: Double =
+    Math.sqrt(x * x + y * y + z * z)
+
 end Vector
