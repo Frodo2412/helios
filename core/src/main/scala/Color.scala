@@ -12,3 +12,9 @@ case class Color(red: Double, green: Double, blue: Double):
   def *(that: Color): Color = Color(red * that.red, green * that.green, blue * that.blue)
 
 end Color
+
+object Color:
+
+  val Black = Color(0.0, 0.0, 0.0)
+
+end Color
