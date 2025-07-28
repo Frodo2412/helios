@@ -66,5 +66,10 @@ object VectorSpec extends FunSuite:
   test("Given a vector, when #normalize, it should return a unit vector"):
     expect(Vector(4, 0, 0).normalize === Vector(1, 0, 0)) and
       expect(Vector(1, 2, 3).normalize.magnitude === 1.0)
-
+    
+  test("Given two vectors, when #dot, it should return the correct dot product"):
+    val v = Vector(1,2,3)
+    val u = Vector(2,3,4)
+    expect(v.dot(u) === 20.0)
+    
 end VectorSpec
