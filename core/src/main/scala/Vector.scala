@@ -2,11 +2,11 @@ package helios
 
 case class Vector(x: Double, y: Double, z: Double):
 
-  def +(other: Vector): Vector =
-    Vector(x + other.x, y + other.y, z + other.z)
+  def +(that: Vector): Vector =
+    Vector(x + that.x, y + that.y, z + that.z)
 
-  def -(other: Vector): Vector =
-    Vector(x - other.x, y - other.y, z - other.z)
+  def -(that: Vector): Vector =
+    Vector(x - that.x, y - that.y, z - that.z)
 
   def unary_- : Vector =
     Vector(-x, -y, -z)
@@ -26,9 +26,19 @@ case class Vector(x: Double, y: Double, z: Double):
     then throw new ArithmeticException("Cannot normalize a zero vector")
     else Vector(x / magnitude, y / magnitude, z / magnitude)
 
-  def dot(other: Vector): Double = x * other.x + y * other.y + z * other.z
+  def dot(that: Vector): Double = x * that.x + y * that.y + z * that.z
 
-  def *(other: Vector): Double = dot(other)
+  def *(that: Vector): Double = dot(that)
+
+  def cross(that: Vector): Vector =
+    Vector(
+      this.y * that.z - this.z * that.y,
+      this.z * that.x - this.x * that.z,
+      this.x * that.y - this.y * that.x
+    )
+
+  // TODO: Think of a better symbol for cross product.
+  infix def x(that: Vector): Vector = cross(that)
 
 end Vector
 
