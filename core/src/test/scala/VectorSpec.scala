@@ -2,10 +2,22 @@ package helios
 
 import instances.given
 
+import cats.Show
 import cats.syntax.all.*
+import org.scalacheck.Arbitrary
 import weaver.FunSuite
 
 object VectorSpec extends FunSuite:
+
+  given Arbitrary[Vector] = Arbitrary {
+    for {
+      x <- Arbitrary.arbitrary[Double]
+      y <- Arbitrary.arbitrary[Double]
+      z <- Arbitrary.arbitrary[Double]
+    } yield Vector(x, y, z)
+  }
+
+  given Show[Vector] = Show.fromToString[Vector]
 
   // TODO: Some of these tests can be turned into property-based tests because this is a pure mathematical structure.
 
@@ -45,10 +57,14 @@ object VectorSpec extends FunSuite:
 
   test("Given a vector, when #magnitude, it should return the correct magnitude"):
     val vector = Vector(1, 2, 3)
-    expect(vector.magnitude === Math.sqrt(14)) and expect(-vector.magnitude === Math.sqrt(14))
+    expect(vector.magnitude === Math.sqrt(14)) and expect((-vector).magnitude === Math.sqrt(14))
 
   test("Given a zero vector, when #magnitude, it should return 0.0"):
     val zeroVector = Vector(0, 0, 0)
     expect(zeroVector.magnitude === 0.0)
+
+  test("Given a vector, when #normalize, it should return a unit vector"):
+    expect(Vector(4, 0, 0).normalize === Vector(1, 0, 0)) and
+      expect(Vector(1, 2, 3).normalize.magnitude === 1.0)
 
 end VectorSpec

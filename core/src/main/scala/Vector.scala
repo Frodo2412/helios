@@ -21,4 +21,21 @@ case class Vector(x: Double, y: Double, z: Double):
   def magnitude: Double =
     Math.sqrt(x * x + y * y + z * z)
 
+  def normalize: Vector =
+    if this == Vector.Zero
+    then throw new ArithmeticException("Cannot normalize a zero vector")
+    else Vector(x / magnitude, y / magnitude, z / magnitude)
+
+end Vector
+
+object Vector:
+
+  val Zero: Vector = Vector(0.0, 0.0, 0.0)
+
+  val UnitX: Vector = Vector(1.0, 0.0, 0.0)
+
+  val UnitY: Vector = Vector(0.0, 1.0, 0.0)
+
+  val UnitZ: Vector = Vector(0.0, 0.0, 1.0)
+
 end Vector
