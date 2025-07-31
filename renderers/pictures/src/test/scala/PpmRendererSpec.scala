@@ -21,16 +21,18 @@ object PpmRendererSpec extends FunSuite:
         "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255"
     expect(ppm.body == expected)
 
-  test("Given a canvas with long lines, when rendering to PPM, it should render all colors correctly"):
+  test("Given a canvas with long lines, when rendering to PPM, it should split lines at 70 characters"):
     var canvas = Canvas(10, 2)
     val color = Color(1, 0.8, 0.6)
     for i <- 0 until 10
         j <- 0 until 2 do canvas = canvas.set(i, j, color)
     val ppm = PpmRenderer.render(canvas)
     val expected =
-      "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153\n" +
-        "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153"
-    expect(ppm.body == expected)
+      "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204\n" +
+        "153 255 204 153 255 204 153 255 204 153 255 204 153\n" +
+        "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204\n" +
+        "153 255 204 153 255 204 153 255 204 153 255 204 153"
+    expect(clue(ppm.body) == clue(expected))
 
   test("Given a canvas, when rendering to PPM, it should finish with \\n"):
     val canvas = Canvas(5, 3)
