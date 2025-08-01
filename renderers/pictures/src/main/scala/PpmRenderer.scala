@@ -9,13 +9,13 @@ object PpmRenderer:
   private val MaxColorsPerLine = 17 // Each color takes 3 characters and space, so 17 colors fit in 70 characters
 
   def render(canvas: Canvas): fs2.Stream[Pure, String] =
-    PpmHeader(canvas.width, canvas.height) ++
+    ppmHeader(canvas.width, canvas.height) ++
       canvas.pixels
         .through(colorToPpm)
         .through(makeLines(canvas.width))
         .through(splitLines(MaxColorsPerLine))
 
-  private def PpmHeader(width: Int, height: Int): Stream[Pure, String] =
+  private def ppmHeader(width: Long, height: Long): Stream[Pure, String] =
     Stream("P3", s"$width $height", "255")
 
   private val colorToPpm: Pipe[Pure, Color, String] =
