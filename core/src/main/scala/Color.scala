@@ -15,6 +15,6 @@ end Color
 
 object Color:
 
-  val Black = Color(0.0, 0.0, 0.0)
+  val Black: Color = Color(0.0, 0.0, 0.0)
 
 end Color

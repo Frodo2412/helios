@@ -1,14 +1,18 @@
 package helios
 
-case class Canvas(width: Int, height: Int, pixels: Array[Color]):
+import fs2.Pure
+
+case class Canvas(width: Int, height: Int, _pixels: Array[Color]):
 
   def set(x: Int, y: Int, color: Color): Canvas =
     val index = y * width + x
-    this.copy(pixels = pixels.updated(index, color))
+    this.copy(_pixels = _pixels.updated(index, color))
 
   def get(x: Int, y: Int): Color =
     val index = y * width + x
-    pixels(index)
+    _pixels(index)
+
+  def pixels: fs2.Stream[Pure, Color] = fs2.Stream.emits(_pixels)
 
 end Canvas
 
