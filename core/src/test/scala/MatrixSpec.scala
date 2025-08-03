@@ -43,4 +43,39 @@ object MatrixSpec extends FunSuite:
       expect(matrix(1, 1) === -2) and
       expect(matrix(2, 2) === 1)
 
+
+  test("Matrix equality with identical matrices"):
+    val matrixA = Matrix(
+      1, 2, 3, 4,
+      5, 6, 7, 8,
+      9, 8, 7, 6,
+      5, 4, 3, 2
+    )
+    
+    val matrixB = Matrix(
+      1, 2, 3, 4,
+      5, 6, 7, 8,
+      9, 8, 7, 6,
+      5, 4, 3, 2
+    )
+    
+    expect(matrixA === matrixB)
+    
+  test("Matrix equality with different matrices"):
+    val matrixA = Matrix(
+      1, 2, 3, 4,
+      5, 6, 7, 8,
+      9, 8, 7, 6,
+      5, 4, 3, 2
+    )
+    
+    val matrixB = Matrix(
+      2, 3, 4, 5,
+      6, 7, 8, 9,
+      8, 7, 6, 5,
+      4, 3, 2, 1
+    )
+    
+    expect(matrixA =!= matrixB)
+
 end MatrixSpec

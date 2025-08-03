@@ -1,8 +1,6 @@
 package helios
 
-import fs2.{Chunk, Pipe, Pure, Stream}
-
-import java.lang.Math.min
+import fs2.{Pipe, Pure, Stream}
 
 object PpmRenderer:
 
