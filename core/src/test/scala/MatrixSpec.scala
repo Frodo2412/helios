@@ -21,4 +21,26 @@ object MatrixSpec extends FunSuite:
       expect(matrix(3, 0) === 13.5) and
       expect(matrix(3, 2) === 15.5)
 
+  test("Given a list of 4 elements, when Matrix#apply, it should create a 2x2 matrix"):
+    val matrix = Matrix(
+      -3, 5,
+      1, -2
+    )
+
+    expect(matrix(0, 0) === -3) and
+      expect(matrix(0, 1) === 5) and
+      expect(matrix(1, 0) === 1) and
+      expect(matrix(1, 1) === -2)
+
+  test("Given a list of 9 elements, when Matrix#apply, it should create a 3x3 matrix"):
+    val matrix = Matrix(
+      -3, 5, 0,
+      1, -2, -7,
+      0, 1, 1
+    )
+
+    expect(matrix(0, 0) === -3) and
+      expect(matrix(1, 1) === -2) and
+      expect(matrix(2, 2) === 1)
+
 end MatrixSpec

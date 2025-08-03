@@ -10,6 +10,7 @@ object Matrix:
 
   // TODO: Make this more type safe
   def apply[T](elements: T*): Matrix[T] =
-    (row: Int, column: Int) => elements(row * 4 + column)
+    val size = Math.sqrt(elements.length).toInt
+    (row: Int, column: Int) => elements(row * size + column)
 
 end Matrix
