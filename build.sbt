@@ -20,6 +20,7 @@ lazy val core = (project in file("core"))
     idePackagePrefix := Some("helios"),
     libraryDependencies ++= Seq(
       "org.typelevel" %% "cats-core" % "2.13.0",
+      "org.typelevel" %% "algebra" % "2.13.0",
       "org.typelevel" %% "cats-effect" % "3.6.3",
       "co.fs2" %% "fs2-core" % "3.12.0",
       "org.typelevel" %% "cats-laws" % "2.13.0" % Test,

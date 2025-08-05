@@ -1,12 +1,16 @@
 package helios
 
+import Matrix.given
+
+import algebra.instances.all.*
 import cats.syntax.all.*
 import weaver.FunSuite
+import weaver.discipline.Discipline
 
-object MatrixSpec extends FunSuite:
+object MatrixSpec extends FunSuite with Discipline:
 
   test("Given a list of 16 elements, when Matrix#apply, it should create a 4x4 matrix"):
-    val matrix = Matrix(
+    val matrix = Matrix.square(
       1, 2, 3, 4,
       5.5, 6.5, 7.5, 8.5,
       9, 10, 11, 12,
@@ -22,7 +26,7 @@ object MatrixSpec extends FunSuite:
       expect(matrix(3, 2) === 15.5)
 
   test("Given a list of 4 elements, when Matrix#apply, it should create a 2x2 matrix"):
-    val matrix = Matrix(
+    val matrix = Matrix.square(
       -3, 5,
       1, -2
     )
@@ -33,7 +37,7 @@ object MatrixSpec extends FunSuite:
       expect(matrix(1, 1) === -2)
 
   test("Given a list of 9 elements, when Matrix#apply, it should create a 3x3 matrix"):
-    val matrix = Matrix(
+    val matrix = Matrix.square(
       -3, 5, 0,
       1, -2, -7,
       0, 1, 1
@@ -43,39 +47,28 @@ object MatrixSpec extends FunSuite:
       expect(matrix(1, 1) === -2) and
       expect(matrix(2, 2) === 1)
 
+  test("Given two matrices, when multiplying them, it should return the correct result"):
+    val matrixA = Matrix.square(
+      1, 2, 3, 4,
+      5, 6, 7, 8,
+      9, 8, 7, 6,
+      5, 4, 3, 2
+    )
 
-  test("Matrix equality with identical matrices"):
-    val matrixA = Matrix(
-      1, 2, 3, 4,
-      5, 6, 7, 8,
-      9, 8, 7, 6,
-      5, 4, 3, 2
+    val matrixB = Matrix.square(
+      -2, 1, 2, 3,
+      3, 2, 1, -1,
+      4, 3, 6, 5,
+      1, 2, 7, 8
     )
-    
-    val matrixB = Matrix(
-      1, 2, 3, 4,
-      5, 6, 7, 8,
-      9, 8, 7, 6,
-      5, 4, 3, 2
+
+    val expected = Matrix.square(
+      20, 22, 50, 48,
+      44, 54, 114, 108,
+      40, 58, 110, 102,
+      16, 26, 46, 42
     )
-    
-    expect(matrixA === matrixB)
-    
-  test("Matrix equality with different matrices"):
-    val matrixA = Matrix(
-      1, 2, 3, 4,
-      5, 6, 7, 8,
-      9, 8, 7, 6,
-      5, 4, 3, 2
-    )
-    
-    val matrixB = Matrix(
-      2, 3, 4, 5,
-      6, 7, 8, 9,
-      8, 7, 6, 5,
-      4, 3, 2, 1
-    )
-    
-    expect(matrixA =!= matrixB)
+
+    expect(matrixA * matrixB === expected)
 
 end MatrixSpec
