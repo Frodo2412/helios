@@ -17,6 +17,6 @@ object NumberSpec extends FunSuite with Discipline:
     Arbitrary(Arbitrary.arbitrary[Number].map(x => (y: Number) => Ring[Number].plus(x, y)))
 
   checkAll("Eq[Number]", EqTests[Number].eqv)
-  checkAll("Ring[Number]", RingLaws[Number].ring)
+  checkAll("Ring[Number]", RingLaws[Number].approxField)
 
 end NumberSpec
