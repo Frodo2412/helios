@@ -1,0 +1,58 @@
+name: Scala Linting
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  scalafmt-check:
+    name: Scalafmt Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: sbt
+
+      - name: Setup sbt
+        uses: sbt/setup-sbt@v1
+
+      - name: sbt update
+        shell: bash
+        run: sbt update
+
+      - name: Check formatting (Scalafmt)
+        shell: bash
+        run: sbt scalafmtCheckAll scalafmtSbtCheck
+
+  scalafix-check:
+    name: Scalafix Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: sbt
+
+      - name: Setup sbt
+        uses: sbt/setup-sbt@v1
+
+      - name: sbt update
+        shell: bash
+        run: sbt update
+
+      - name: Check linting (Scalafix)
+        shell: bash
+        run: sbt "scalafixAll --check"
