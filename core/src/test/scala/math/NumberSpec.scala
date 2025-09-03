@@ -2,7 +2,7 @@ package helios
 package math
 
 import algebra.laws.RingLaws
-import algebra.ring.Ring
+import algebra.ring.{Field, Ring}
 import cats.kernel.laws.discipline.EqTests
 import org.scalacheck.{Arbitrary, Gen}
 import weaver.FunSuite
@@ -12,7 +12,7 @@ object NumberSpec extends FunSuite with Discipline:
 
   given Arbitrary[Number] =
     Arbitrary {
-      Gen.chooseNum(-100,100).map(Ring[Number].fromInt)
+      Gen.double.map(Field[Number].fromDouble)
     }
 
   given Arbitrary[Number => Number] =
