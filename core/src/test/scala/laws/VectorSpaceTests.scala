@@ -3,13 +3,16 @@ package laws
 
 import math.VectorSpace
 
-import algebra.laws.RingLaws
-import algebra.ring.CommutativeRing
+import algebra.Eq
+import algebra.laws.{GroupLaws, RingLaws}
+import algebra.ring.AdditiveMonoid
+import cats.kernel.Eq
 import cats.kernel.laws.discipline.CommutativeGroupTests
-import cats.kernel.{CommutativeGroup, Eq}
 import org.scalacheck.Prop.forAll
 import org.scalacheck.{Arbitrary, Prop}
-import org.typelevel.discipline.Laws
+import org.typelevel.discipline.{Laws, Predicate}
+
+import scala.annotation.nowarn
 
 /**
  * Discipline tests for VectorSpace laws
@@ -22,6 +25,9 @@ import org.typelevel.discipline.Laws
 trait VectorSpaceTests[V, S] extends CommutativeGroupTests[V] with RingLaws[S]:
 
   def laws: VectorSpaceLaws[V, S]
+
+  val scalarField: RingLaws[S] = this
+  val vectorGroup: CommutativeGroupTests[V] = this
 
   def vectorSpace(using
                   vs: VectorSpace[V, S],
@@ -36,7 +42,7 @@ trait VectorSpaceTests[V, S] extends CommutativeGroupTests[V] with RingLaws[S]:
 
       override def bases: Seq[(String, Laws#RuleSet)] = Nil
 
-      override def parents: Seq[RuleSet] = Seq(commutativeGroup, field)
+      override def parents: Seq[RuleSet] = Seq(vectorGroup.commutativeGroup.asInstanceOf[RuleSet], field)
 
       override def props: Seq[(String, Prop)] = Seq(
         "scalar multiplication compatibility" -> forAll(laws.scalarMultiplicationCompatibility _),
@@ -53,8 +59,22 @@ end VectorSpaceTests
 
 object VectorSpaceTests:
 
-  def apply[V, S](using VectorSpace[V, S], Eq[V], Eq[S]): VectorSpaceTests[V, S] =
+  def apply[V: Eq, S](using VectorSpace[V, S])(using arb: Arbitrary[S], eqS: Eq[S]): VectorSpaceTests[V, S] =
     new VectorSpaceTests[V, S]:
+
       def laws: VectorSpaceLaws[V, S] = VectorSpaceLaws[V, S]
+
+      def Arb: Arbitrary[S] = arb
+
+      def pred: Predicate[S] = (a: S) => Eq[S].neqv(a, AdditiveMonoid[S].zero)
+
+      @nowarn("msg=deprecated")
+      val nonZeroLaws: GroupLaws[S] = new GroupLaws[S] {
+        def Arb = Arbitrary(Arbitrary.arbitrary[S](arb).filter(pred))
+
+        def Equ: Eq[S] = eqS
+      }
+
+    end new
 
 end VectorSpaceTests

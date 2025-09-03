@@ -1,6 +1,7 @@
 package helios
 package math
 
+import laws.VectorSpaceTests
 import math.Number.given
 import math.Vector3.given
 
@@ -28,6 +29,6 @@ object Vector3Spec extends FunSuite with Discipline with Checkers:
   }
 
   checkAll("Eq[Vector3[Number]]", EqTests[Vector3[Number]].eqv)
-  checkAll("CommutativeGroup[Vector]", CommutativeGroupTests[Vector3[Number]].commutativeGroup)
+  checkAll("CommutativeGroup[Vector]", VectorSpaceTests[Vector3[Number], Number].vectorSpace)
 
 end Vector3Spec

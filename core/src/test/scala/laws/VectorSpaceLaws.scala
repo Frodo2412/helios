@@ -3,7 +3,9 @@ package laws
 
 import math.VectorSpace
 
-import cats.kernel.Eq
+import algebra.laws.RingLaws
+import cats.kernel.laws.CommutativeGroupLaws
+import cats.kernel.{CommutativeGroup, Eq}
 import cats.syntax.all.*
 import org.scalacheck.Prop
 import org.scalacheck.Prop.*
@@ -15,7 +17,7 @@ import org.scalacheck.Prop.*
  * and scalar arithmetic laws come from Field[S] (via VectorSpace).
  * Here we only test the interaction laws via the provided instance.
  */
-trait VectorSpaceLaws[V, S]:
+trait VectorSpaceLaws[V, S] extends CommutativeGroupLaws[V]:
 
   given vs: VectorSpace[V, S]
 
@@ -51,6 +53,8 @@ object VectorSpaceLaws:
   def apply[V, S](using vs0: VectorSpace[V, S], eqV0: Eq[V], eqS0: Eq[S]): VectorSpaceLaws[V, S] =
     new VectorSpaceLaws[V, S]:
       given vs: VectorSpace[V, S] = vs0
+
+      given S: CommutativeGroup[V] = vs0
 
       given eqV: Eq[V] = eqV0
 
