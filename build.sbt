@@ -1,17 +1,26 @@
+import sbt.ThisBuild
+
+import scala.collection.Seq
+
 ThisBuild / version := "0.1.0-SNAPSHOT"
 
 ThisBuild / scalaVersion := "3.3.6"
 
 ThisBuild / libraryDependencies ++= Seq(
-  "org.typelevel" %% "weaver-cats" % "0.9.3" % Test,
-  "org.typelevel" %% "weaver-scalacheck" % "0.9.3" % Test,
-  "org.typelevel" %% "weaver-discipline" % "0.9.3" % Test
+  "org.typelevel" %% "weaver-cats" % "0.10.1" % Test,
+  "org.typelevel" %% "weaver-scalacheck" % "0.10.1" % Test,
+  "org.typelevel" %% "weaver-discipline" % "0.10.1" % Test
 )
+
+ThisBuild / strykerBaseDir := baseDirectory.value
+ThisBuild / strykerMutate := Seq("**/main/scala/**/*.scala")
+ThisBuild / strykerConcurrency := 23
+ThisBuild / strykerReporters := Seq("console")
 
 lazy val root = (project in file("."))
   .settings(
     name := "helios",
-    idePackagePrefix := Some("helios")
+    idePackagePrefix := Some("helios"),
   ).aggregate(core, pictures)
 
 lazy val core = (project in file("core"))
