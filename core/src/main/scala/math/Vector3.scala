@@ -14,7 +14,7 @@ object Vector3:
 
   given [T: CommutativeGroup]: CommutativeGroup[Vector3[T]] with
 
-    val zero: T = CommutativeGroup[T].empty
+    private val zero: T = CommutativeGroup[T].empty
 
     override val empty: Vector3[T] = Vector3(zero, zero, zero)
 
