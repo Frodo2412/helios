@@ -1,7 +1,6 @@
 package helios
 package math
 
-import algebra.ring.MultiplicativeGroup
 import cats.kernel.CommutativeGroup
 import cats.syntax.all.*
 import cats.{Eq, Show}
