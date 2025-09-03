@@ -4,22 +4,21 @@ package math
 import math.Number.given
 import math.Vector3.given
 
-import algebra.laws.RingLaws
-import algebra.ring.Ring
 import cats.Show
-import cats.kernel.laws.discipline.{CommutativeGroupTests, EqTests}
-import cats.syntax.all.*
+import cats.kernel.laws.discipline.EqTests
 import org.scalacheck.Arbitrary
 import weaver.FunSuite
 import weaver.discipline.Discipline
+import weaver.scalacheck.Checkers
 
-object Vector3Spec extends FunSuite with Discipline:
+object Vector3Spec extends FunSuite with Discipline with Checkers:
 
-  given Arbitrary[Number] =
-    Arbitrary(Arbitrary.arbitrary[Int].map(Ring[Number].fromInt))
+  import NumberSpec.given
 
-  given Arbitrary[Number => Number] =
-    Arbitrary(Arbitrary.arbitrary[Number].map(x => (y: Number) => Ring[Number].plus(x, y)))
+  given Arbitrary[Vector3[Number] => Vector3[Number]] = Arbitrary {
+    Arbitrary.arbitrary[Number => Number].map:
+      f => (v: Vector3[Number]) => Vector3(f(v.x), f(v.y), f(v.z))
+  }
 
   given [T: Arbitrary]: Arbitrary[Vector3[T]] = Arbitrary {
     for {
@@ -29,9 +28,7 @@ object Vector3Spec extends FunSuite with Discipline:
     } yield Vector3(x, y, z)
   }
 
-  given [T: Show]: Show[Vector3[T]] = Show.fromToString[Vector3[T]]
-
-  //  checkAll("Eq[Vector3[Number]", EqTests[Vector3[Number]].eqv)
+  checkAll("Eq[Vector3[Number]]", EqTests[Vector3[Number]].eqv)
   //  checkAll("CommutativeGroup[Vector]", CommutativeGroupTests[Vector3[Number]].commutativeGroup)
 
 end Vector3Spec
