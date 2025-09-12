@@ -14,7 +14,7 @@ import cats.kernel.CommutativeGroup
  * - F is a field (we use CommutativeRing as a close approximation)
  * - Scalar multiplication satisfies:
  *   1. Compatibility: a * (b * v) = (a * b) * v
- *   2. Identity: 1 * v = v  
+ *   2. Identity: 1 * v = v
  *   3. Distributivity over vector addition: a * (u + v) = a * u + a * v
  *   4. Distributivity over scalar addition: (a + b) * v = a * v + b * v
  */

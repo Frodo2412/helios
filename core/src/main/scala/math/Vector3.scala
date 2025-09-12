@@ -13,15 +13,23 @@ object Vector3:
 
   given [T: Show]: Show[Vector3[T]] = Show.fromToString[Vector3[T]]
 
-  given [T: Field]: VectorSpace[Vector3[T], T] with
+  given [T: Field]: InnerProductSpace[Vector3[T], T] with
 
     override val zero: T           = Field[T].zero
     override val one: T            = Field[T].one
     override val empty: Vector3[T] = Vector3(zero, zero, zero)
 
-    // Scalar Product
+    // Scalar multiplication
     override def scale(scalar: T, vector: Vector3[T]): Vector3[T] =
       Vector3(Field[T].times(scalar, vector.x), Field[T].times(scalar, vector.y), Field[T].times(scalar, vector.z))
+
+    // Inner product (dot product)
+    override def inner(u: Vector3[T], v: Vector3[T]): T =
+      val fx = Field[T]
+      val a  = fx.times(u.x, v.x)
+      val b  = fx.times(u.y, v.y)
+      val c  = fx.times(u.z, v.z)
+      fx.plus(fx.plus(a, b), c)
 
     // Field[T] operations
     override def negate(u: T): T      = Field[T].negate(u)
