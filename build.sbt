@@ -1,6 +1,7 @@
 import sbt.ThisBuild
 
 import scala.collection.Seq
+import scala.concurrent.duration.DurationInt
 
 ThisBuild / version := "0.1.0-SNAPSHOT"
 
@@ -12,16 +13,14 @@ ThisBuild / libraryDependencies ++= Seq(
   "org.typelevel" %% "weaver-discipline" % "0.10.1" % Test
 )
 
-ThisBuild / strykerBaseDir := baseDirectory.value
-ThisBuild / strykerMutate := Seq("**/main/scala/**/*.scala")
-ThisBuild / strykerConcurrency := 23
-ThisBuild / strykerReporters := Seq("console")
+ThisBuild / strykerTimeout := 10.second
+ThisBuild / strykerTimeoutFactor := 1.0
 
 lazy val root = (project in file("."))
   .settings(
     name := "helios",
-    idePackagePrefix := Some("helios"),
-  ).aggregate(core, pictures)
+    idePackagePrefix := Some("helios")
+  ).aggregate(core)
 
 lazy val core = (project in file("core"))
   .settings(
@@ -36,15 +35,3 @@ lazy val core = (project in file("core"))
       "org.typelevel" %% "algebra-laws" % "2.13.0" % Test,
     )
   )
-
-lazy val pictures = (project in file("renderers/pictures"))
-  .settings(
-    name := "picture-renderer",
-    idePackagePrefix := Some("helios"),
-    libraryDependencies ++= Seq(
-      "org.typelevel" %% "cats-effect" % "3.6.3",
-      "org.typelevel" %% "cats-core" % "2.13.0",
-      "co.fs2" %% "fs2-io" % "3.12.0"
-    )
-  )
-  .dependsOn(core)

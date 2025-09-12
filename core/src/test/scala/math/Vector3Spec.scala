@@ -16,8 +16,10 @@ object Vector3Spec extends FunSuite with Discipline with Checkers:
   import NumberSpec.given
 
   given Arbitrary[Vector3[Number] => Vector3[Number]] = Arbitrary {
-    Arbitrary.arbitrary[Number => Number].map:
-      f => (v: Vector3[Number]) => Vector3(f(v.x), f(v.y), f(v.z))
+    Arbitrary
+      .arbitrary[Number => Number]
+      .map: f =>
+        (v: Vector3[Number]) => Vector3(f(v.x), f(v.y), f(v.z))
   }
 
   given [T: Arbitrary]: Arbitrary[Vector3[T]] = Arbitrary {

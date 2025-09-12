@@ -10,7 +10,6 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/project" />
-            <option value="$PROJECT_DIR$/renderers/pictures" />
           </set>
         </option>
         <option name="sbtVersion" value="1.11.3" />
