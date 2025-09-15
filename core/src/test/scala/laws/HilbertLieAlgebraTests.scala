@@ -1,11 +1,14 @@
 package helios
 package laws
 
-import math.{HilbertLieAlgebra, InnerProductSpace, LieAlgebra}
-
 import cats.kernel.Eq
-import org.scalacheck.{Arbitrary, Prop}
-import org.typelevel.discipline.{Laws, Predicate}
+import helios.math.HilbertLieAlgebra
+import helios.math.InnerProductSpace
+import helios.math.LieAlgebra
+import org.scalacheck.Arbitrary
+import org.scalacheck.Prop
+import org.typelevel.discipline.Laws
+import org.typelevel.discipline.Predicate
 import org.typelevel.scalaccompat.annotation.nowarn
 
 /** Discipline tests for HilbertLieAlgebra laws
@@ -61,7 +64,7 @@ object HilbertLieAlgebraTests:
 
       @nowarn("msg=deprecated")
       val nonZeroLaws: algebra.laws.GroupLaws[S] = new algebra.laws.GroupLaws[S] {
-        def Arb        = Arbitrary(Arbitrary.arbitrary[S](arb).filter(pred))
+        def Arb: Arbitrary[S]        = Arbitrary(Arbitrary.arbitrary[S](arb).filter(pred))
         def Equ: Eq[S] = eqS
       }
 

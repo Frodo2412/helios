@@ -1,13 +1,12 @@
 package helios
 package laws
 
-import math.LieAlgebra
-
-import cats.kernel.laws.CommutativeGroupLaws
 import cats.kernel.Eq
-import cats.syntax.all.*
+import cats.kernel.laws.CommutativeGroupLaws
+import cats.syntax.all._
+import helios.math.LieAlgebra
 import org.scalacheck.Prop
-import org.scalacheck.Prop.*
+import org.scalacheck.Prop._
 
 /**
  * Laws for LieAlgebra type class (over a field S with vectors V)

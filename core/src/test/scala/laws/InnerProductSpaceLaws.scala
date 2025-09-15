@@ -1,13 +1,13 @@
 package helios
 package laws
 
-import math.InnerProductSpace
-
+import cats.kernel.CommutativeGroup
+import cats.kernel.Eq
 import cats.kernel.laws.CommutativeGroupLaws
-import cats.kernel.{CommutativeGroup, Eq}
-import cats.syntax.all.*
+import cats.syntax.all._
+import helios.math.InnerProductSpace
 import org.scalacheck.Prop
-import org.scalacheck.Prop.*
+import org.scalacheck.Prop._
 
 /**
  * Laws for InnerProductSpace type class (over a field S with vectors V)

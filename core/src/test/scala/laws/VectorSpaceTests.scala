@@ -1,17 +1,19 @@
 package helios
 package laws
 
-import math.VectorSpace
+import scala.annotation.nowarn
 
 import algebra.Eq
-import algebra.laws.{GroupLaws, RingLaws}
+import algebra.laws.GroupLaws
+import algebra.laws.RingLaws
 import algebra.ring.AdditiveMonoid
 import cats.kernel.laws.discipline.CommutativeGroupTests
+import helios.math.VectorSpace
+import org.scalacheck.Arbitrary
+import org.scalacheck.Prop
 import org.scalacheck.Prop.forAll
-import org.scalacheck.{Arbitrary, Prop}
-import org.typelevel.discipline.{Laws, Predicate}
-
-import scala.annotation.nowarn
+import org.typelevel.discipline.Laws
+import org.typelevel.discipline.Predicate
 
 /** Discipline tests for VectorSpace laws
   *
@@ -74,7 +76,7 @@ object VectorSpaceTests:
 
       @nowarn("msg=deprecated")
       val nonZeroLaws: GroupLaws[S] = new GroupLaws[S] {
-        def Arb = Arbitrary(Arbitrary.arbitrary[S](arb).filter(pred))
+        def Arb: Arbitrary[S] = Arbitrary(Arbitrary.arbitrary[S](arb).filter(pred))
 
         def Equ: Eq[S] = eqS
       }

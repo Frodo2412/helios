@@ -1,14 +1,15 @@
 package helios
 package laws
 
-import math.LieAlgebra
+import scala.annotation.nowarn
 
 import algebra.ring.AdditiveMonoid
 import cats.kernel.Eq
-import org.scalacheck.{Arbitrary, Prop}
-import org.typelevel.discipline.{Laws, Predicate}
-
-import scala.annotation.nowarn
+import helios.math.LieAlgebra
+import org.scalacheck.Arbitrary
+import org.scalacheck.Prop
+import org.typelevel.discipline.Laws
+import org.typelevel.discipline.Predicate
 
 /** Discipline tests for LieAlgebra laws
   *
@@ -64,7 +65,7 @@ object LieAlgebraTests:
 
       @nowarn("msg=deprecated")
       val nonZeroLaws: algebra.laws.GroupLaws[S] = new algebra.laws.GroupLaws[S] {
-        def Arb = Arbitrary(Arbitrary.arbitrary[S](arb).filter(pred))
+        def Arb: Arbitrary[S] = Arbitrary(Arbitrary.arbitrary[S](arb).filter(pred))
 
         def Equ: Eq[S] = Eq[S]
       }

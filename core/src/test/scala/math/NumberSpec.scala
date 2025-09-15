@@ -1,10 +1,11 @@
 package helios
 package math
 
-import algebra.laws.RingLaws
-import algebra.ring.{Field, Ring}
+import algebra.ring.Field
+import algebra.ring.Ring
 import cats.kernel.laws.discipline.EqTests
-import org.scalacheck.{Arbitrary, Gen}
+import org.scalacheck.Arbitrary
+import org.scalacheck.Gen
 import weaver.FunSuite
 import weaver.discipline.Discipline
 

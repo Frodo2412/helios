@@ -1,14 +1,13 @@
 package helios
 package laws
 
-import math.VectorSpace
-
-import algebra.laws.RingLaws
+import cats.kernel.CommutativeGroup
+import cats.kernel.Eq
 import cats.kernel.laws.CommutativeGroupLaws
-import cats.kernel.{CommutativeGroup, Eq}
-import cats.syntax.all.*
+import cats.syntax.all._
+import helios.math.VectorSpace
 import org.scalacheck.Prop
-import org.scalacheck.Prop.*
+import org.scalacheck.Prop._
 
 /**
  * Laws for VectorSpace type class
@@ -25,7 +24,6 @@ trait VectorSpaceLaws[V, S] extends CommutativeGroupLaws[V]:
 
   given eqS: Eq[S]
 
-  import VectorSpace.*
 
   // Vector space specific laws (scalar multiplication laws)
   def scalarMultiplicationCompatibility(a: S, b: S, v: V): Prop =

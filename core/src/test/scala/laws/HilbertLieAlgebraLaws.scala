@@ -1,17 +1,15 @@
 package helios
 package laws
 
-import math.{HilbertLieAlgebra, InnerProductSpace, LieAlgebra}
-
 import cats.kernel.Eq
+import helios.math.HilbertLieAlgebra
 
-/**
- * Laws for HilbertLieAlgebra type class.
- *
- * This structure should satisfy both:
- *  - InnerProductSpace laws
- *  - LieAlgebra laws
- */
+/** Laws for HilbertLieAlgebra type class.
+  *
+  * This structure should satisfy both:
+  *   - InnerProductSpace laws
+  *   - LieAlgebra laws
+  */
 trait HilbertLieAlgebraLaws[V, S]:
 
   given hla: HilbertLieAlgebra[V, S]
@@ -29,7 +27,7 @@ object HilbertLieAlgebraLaws:
   def apply[V, S](using hla0: HilbertLieAlgebra[V, S], eqV0: Eq[V], eqS0: Eq[S]): HilbertLieAlgebraLaws[V, S] =
     new HilbertLieAlgebraLaws[V, S]:
       given hla: HilbertLieAlgebra[V, S] = hla0
-      given eqV: Eq[V] = eqV0
-      given eqS: Eq[S] = eqS0
+      given eqV: Eq[V]                   = eqV0
+      given eqS: Eq[S]                   = eqS0
 
 end HilbertLieAlgebraLaws

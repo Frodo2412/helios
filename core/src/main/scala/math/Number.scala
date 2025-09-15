@@ -1,11 +1,13 @@
 package helios
 package math
 
+import java.math.MathContext
+import java.math.RoundingMode
+
 import algebra.instances.BigDecimalAlgebra
 import algebra.ring.Field
-import cats.{Eq, Show}
-
-import java.math.{MathContext, RoundingMode}
+import cats.Eq
+import cats.Show
 
 opaque type Number = BigDecimal
 

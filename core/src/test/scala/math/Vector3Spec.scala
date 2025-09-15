@@ -1,15 +1,15 @@
 package helios
 package math
 
-import laws.HilbertLieAlgebraTests
-import math.Number.given
-import math.Vector3.given
-
-import cats.kernel.laws.discipline.{CommutativeGroupTests, EqTests}
+import cats.kernel.laws.discipline.EqTests
 import org.scalacheck.Arbitrary
 import weaver.FunSuite
 import weaver.discipline.Discipline
 import weaver.scalacheck.Checkers
+
+import laws.HilbertLieAlgebraTests
+import math.Number.given
+import math.Vector3.given
 
 object Vector3Spec extends FunSuite with Discipline with Checkers:
 

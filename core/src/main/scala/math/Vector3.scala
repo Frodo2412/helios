@@ -2,8 +2,9 @@ package helios
 package math
 
 import algebra.ring.Field
-import cats.syntax.all.*
-import cats.{Eq, Show}
+import cats.Eq
+import cats.Show
+import cats.syntax.all._
 
 case class Vector3[T](x: T, y: T, z: T)
 

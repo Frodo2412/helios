@@ -2,6 +2,38 @@
 <project version="4">
   <component name="ScalaCompilerConfiguration">
     <option name="separateProdTestSources" value="true" />
-    <profile name="sbt 1" modules="helios,helios.helios-core,helios.helios-core.main,helios.helios-core.test,helios.main,helios.picture-renderer,helios.picture-renderer.main,helios.picture-renderer.main~1,helios.picture-renderer.test,helios.picture-renderer.test~1,helios.test" />
+    <profile name="sbt 1" modules="helios,helios.helios-core,helios.picture-renderer,helios.picture-renderer.main,helios.picture-renderer.main~1,helios.picture-renderer.test,helios.picture-renderer.test~1" />
+    <profile name="sbt 2" modules="helios.test">
+      <parameters>
+        <parameter value="-Wunused:imports" />
+        <parameter value="-Xsemanticdb" />
+        <parameter value="-semanticdb-target" />
+        <parameter value="$PROJECT_DIR$/target/scala-3.3.6/test-meta" />
+      </parameters>
+    </profile>
+    <profile name="sbt 3" modules="helios.main">
+      <parameters>
+        <parameter value="-Wunused:imports" />
+        <parameter value="-Xsemanticdb" />
+        <parameter value="-semanticdb-target" />
+        <parameter value="$PROJECT_DIR$/target/scala-3.3.6/meta" />
+      </parameters>
+    </profile>
+    <profile name="sbt 4" modules="helios.helios-core.test">
+      <parameters>
+        <parameter value="-Wunused:imports" />
+        <parameter value="-Xsemanticdb" />
+        <parameter value="-semanticdb-target" />
+        <parameter value="$PROJECT_DIR$/core/target/scala-3.3.6/test-meta" />
+      </parameters>
+    </profile>
+    <profile name="sbt 5" modules="helios.helios-core.main">
+      <parameters>
+        <parameter value="-Wunused:imports" />
+        <parameter value="-Xsemanticdb" />
+        <parameter value="-semanticdb-target" />
+        <parameter value="$PROJECT_DIR$/core/target/scala-3.3.6/meta" />
+      </parameters>
+    </profile>
   </component>
 </project>
