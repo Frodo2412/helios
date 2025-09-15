@@ -13,7 +13,7 @@ object Vector3:
 
   given [T: Show]: Show[Vector3[T]] = Show.fromToString[Vector3[T]]
 
-  given [T: Field]: InnerProductSpace[Vector3[T], T] with
+  given [T: Field]: HilbertLieAlgebra[Vector3[T], T] with
 
     override val zero: T           = Field[T].zero
     override val one: T            = Field[T].one
@@ -42,6 +42,13 @@ object Vector3:
       Vector3(Field[T].plus(x.x, y.x), Field[T].plus(x.y, y.y), Field[T].plus(x.z, y.z))
     override def inverse(a: Vector3[T]): Vector3[T]                = Vector3(negate(a.x), negate(a.y), negate(a.z))
 
+    /** Lie bracket: V × V → V */
+    override def bracket(u: Vector3[T], v: Vector3[T]): Vector3[T] =
+      Vector3(
+        Field[T].minus(Field[T].times(u.y, v.z), Field[T].times(u.z, v.y)),
+        Field[T].minus(Field[T].times(u.z, v.x), Field[T].times(u.x, v.z)),
+        Field[T].minus(Field[T].times(u.x, v.y), Field[T].times(u.y, v.x))
+      )
   end given
 
 end Vector3

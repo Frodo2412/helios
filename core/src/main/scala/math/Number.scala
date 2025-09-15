@@ -24,6 +24,10 @@ object Number:
       diff.divide(denom, mc).compareTo(Epsilon) <= 0
 
   given Show[Number] = Show.fromToString[Number]
-  given Field[Number] = new BigDecimalAlgebra(mc)
+
+  // Stable, named instance to avoid ambiguous/recursive implicit resolution when needed explicitly
+  val field: Field[Number] = new BigDecimalAlgebra(mc)
+
+  given Field[Number] = field
 
 end Number

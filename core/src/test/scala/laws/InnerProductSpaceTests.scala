@@ -5,7 +5,6 @@ import math.InnerProductSpace
 
 import algebra.ring.AdditiveMonoid
 import cats.kernel.Eq
-import cats.kernel.laws.discipline.CommutativeGroupTests
 import org.scalacheck.{Arbitrary, Prop}
 import org.typelevel.discipline.{Laws, Predicate}
 
@@ -33,9 +32,7 @@ trait InnerProductSpaceTests[V, S] extends VectorSpaceTests[V, S]:
 
       override def bases: Seq[(String, Laws#RuleSet)] = Nil
 
-      override def parents: Seq[RuleSet] = Seq(
-        vectorSpace
-      )
+      override def parents: Seq[RuleSet] = Seq(vectorSpace)
 
       override def props: Seq[(String, Prop)] = Seq(
         "symmetry"           -> org.scalacheck.Prop.forAll((u: V, v: V) => ipLaws.symmetry(u, v)),

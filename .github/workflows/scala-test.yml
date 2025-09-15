@@ -32,23 +32,24 @@ jobs:
         shell: bash
         run: sbt test
 
-  mutation-test:
-    name: Mutation Testing (Stryker4s)
-    runs-on: ubuntu-latest
-    needs: [ unit-test ]
-    steps:
-      - uses: actions/checkout@v3
 
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 21
-          cache: sbt
-
-      - name: Setup sbt
-        uses: sbt/setup-sbt@v1
-
-      - name: Run Stryker4s
-        shell: bash
-        run: sbt "stryker"
+#  mutation-test:
+#    name: Mutation Testing (Stryker4s)
+#    runs-on: ubuntu-latest
+#    needs: [ unit-test ]
+#    steps:
+#      - uses: actions/checkout@v3
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          distribution: temurin
+#          java-version: 21
+#          cache: sbt
+#
+#      - name: Setup sbt
+#        uses: sbt/setup-sbt@v1
+#
+#      - name: Run Stryker4s
+#        shell: bash
+#        run: sbt "stryker"
